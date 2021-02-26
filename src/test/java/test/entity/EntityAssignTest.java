@@ -54,7 +54,7 @@ public class EntityAssignTest extends BaseTest {
         Assert.assertEquals(assignPage.getRow(0), expectedValues);
     }
 
-//    @Ignore
+    @Ignore
     @Test(dependsOnMethods = "assignTest")
     public void editTest() {
 
@@ -79,7 +79,7 @@ public class EntityAssignTest extends BaseTest {
         Assert.assertEquals(assignPage.getRow(0), expectedValues);
     }
 
-//    @Ignore
+    @Ignore
     @Test(dependsOnMethods = "editTest")
     public void deleteTest() {
 
