@@ -35,23 +35,23 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewParent = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewParent.click();
 
-        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
-        InputString.sendKeys(STRING);
+        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
+        inputString.sendKeys(STRING);
 
-        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        InputText.sendKeys(TEXT);
+        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        inputText.sendKeys(TEXT);
 
-        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        InputInt.sendKeys(INT);
+        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        inputInt.sendKeys(INT);
 
-        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        InputDecimal.sendKeys(DECIMAL);
+        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        inputDecimal.sendKeys(DECIMAL);
 
-        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        InputDate.sendKeys(DATE);
+        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        inputDate.sendKeys(DATE);
 
-        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        InputDateTime.sendKeys(DATETIME);
+        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        inputDateTime.sendKeys(DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
         Dropdown.selectByVisibleText(USER);
@@ -77,23 +77,23 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewChild = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewChild.click();
 
-        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
-        InputString.sendKeys(STRING);
+        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
+        inputString.sendKeys(STRING);
 
-        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        InputText.sendKeys(TEXT);
+        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        inputText.sendKeys(TEXT);
 
-        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        InputInt.sendKeys(INT);
+        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        inputInt.sendKeys(INT);
 
-        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        InputDecimal.sendKeys(DECIMAL);
+        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        inputDecimal.sendKeys(DECIMAL);
 
-        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        ProjectUtils.fill(getWebDriverWait(),InputDate, DATE);
+        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        ProjectUtils.fill(getWebDriverWait(),inputDate, DATE);
 
-        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        ProjectUtils.fill(getWebDriverWait(),InputDateTime, DATETIME);
+        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        ProjectUtils.fill(getWebDriverWait(),inputDateTime, DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
         Dropdown.selectByVisibleText(USER);
@@ -125,23 +125,23 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewChild = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewChild.click();
 
-        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
-        InputString.sendKeys(STRING);
+        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
+        inputString.sendKeys(STRING);
 
-        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        InputText.sendKeys(TEXT);
+        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        inputText.sendKeys(TEXT);
 
-        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        InputInt.sendKeys(INT);
+        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        inputInt.sendKeys(INT);
 
-        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        InputDecimal.sendKeys(DECIMAL);
+        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        inputDecimal.sendKeys(DECIMAL);
 
-        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        ProjectUtils.fill(getWebDriverWait(),InputDate, DATE);
+        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        ProjectUtils.fill(getWebDriverWait(),inputDate, DATE);
 
-        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        ProjectUtils.fill(getWebDriverWait(),InputDateTime, DATETIME);
+        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        ProjectUtils.fill(getWebDriverWait(),inputDateTime, DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
         Dropdown.selectByVisibleText(USER);
