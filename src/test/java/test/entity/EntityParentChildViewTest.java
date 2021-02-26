@@ -30,9 +30,6 @@ public class EntityParentChildViewTest extends BaseTest {
 
         WebDriver driver = getDriver();
 
-        WebElement Entities = driver.findElement(By.xpath("//p[contains(text(),'Entities')]"));
-        Entities.click();
-
         WebElement ParentMenu = driver.findElement(By.xpath("//p[contains(text(),'Parent')]"));
         ParentMenu.click();
 
