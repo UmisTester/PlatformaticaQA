@@ -11,9 +11,11 @@ import runner.type.Profile;
 import runner.type.ProfileType;
 import runner.type.Run;
 import runner.type.RunType;
+import test.data.AppConstant;
 
 @Profile(profile = ProfileType.MARKETPLACE)
 @Run(run = RunType.Multiple)
+
 public class AdminConstantsTest extends BaseTest {
 
     private WebDriver driver;
@@ -21,12 +23,12 @@ public class AdminConstantsTest extends BaseTest {
 
     private Boolean isUnableCreateApp() {
         return getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//body"))).getText().equals("Unable to create instance");
+                (By.xpath("//body"))).getText().equalsIgnoreCase(AppConstant.PORTAL_ERROR_MESSAGE);
     }
 
     private String[] getEntityValues() {
         String name = RandomStringUtils.randomAlphanumeric(6, 10).toLowerCase();
-        return new String[] {name, name, String.format("https://%s.eteam.work", name), "admin", "2", "1", "English"};
+        return new String[]{name, name, String.format("https://%s.eteam.work", name), "admin", "2", "1", "English"};
     }
 
     private WebElement getCompany(String value) {
@@ -44,11 +46,9 @@ public class AdminConstantsTest extends BaseTest {
                 (By.xpath("//i[contains(text(),'miscellaneous_services')]/parent::a"))).click();
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable
                 (By.xpath("//span[contains(text(),'List constants')]"))).click();
-        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//div[contains(@class,'card-body')]")));
     }
 
-    private void commandInCMD(WebDriver driver, String command) {
+    private void commandInCMD(String command) {
         WebElement cmd = getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//textarea[@id='pa-cli-cmd']")));
         cmd.click();
@@ -60,7 +60,7 @@ public class AdminConstantsTest extends BaseTest {
     }
 
     @Test
-    public void createApplicationTest() throws InterruptedException {
+    public void createApplicationTest() {
         driver = getDriver();
 
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated
@@ -79,7 +79,7 @@ public class AdminConstantsTest extends BaseTest {
         } while (isUnableCreateApp());
 
         String congrats = driver.findElement(By.xpath("//div[@class='card-body ']/div/h3[1]")).getText();
-        Assert.assertEquals(congrats, "Congratulations! Your instance was successfully created");
+        Assert.assertEquals(congrats, AppConstant.INSTANCE_CREATED_TEXT);
 
         app_name = entity_values[0];
 
@@ -94,14 +94,14 @@ public class AdminConstantsTest extends BaseTest {
         driver.findElement(By.xpath("//button[contains(text(),'Sign in')]")).click();
     }
 
-    @Test (dependsOnMethods = "createApplicationTest")
+    @Test(dependsOnMethods = "createApplicationTest")
     public void createConstants() {
         driver.get(String.format("https://%s.eteam.work", app_name));
 
         goToConstantsList();
         String company_name_1 = ProjectUtils.createUUID();
-        commandInCMD(driver, String.format("create constant \"Company Name\" = \"%s\"", company_name_1));
-        commandInCMD(driver, "create constant \"Company Email\" = \"contact@company.com\"");
+        commandInCMD(String.format("create constant \"Company Name\" = \"%s\"", company_name_1));
+        commandInCMD("create constant \"Company Email\" = \"contact@company.com\"");
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//button[@type='submit']"))).click();
         goToConstantsList();
@@ -110,7 +110,7 @@ public class AdminConstantsTest extends BaseTest {
         Assert.assertEquals(getCompany("Email").getAttribute("value"), "contact@company.com");
     }
 
-    @Test (dependsOnMethods = "createConstants")
+    @Test(dependsOnMethods = "createConstants")
     public void editConstant() {
         driver.get(String.format("https://%s.eteam.work", app_name));
 
@@ -124,13 +124,13 @@ public class AdminConstantsTest extends BaseTest {
         Assert.assertEquals(String.valueOf(getCompany("Name").getAttribute("value")), company_name_2);
     }
 
-    @Test (dependsOnMethods = "editConstant")
+    @Test(dependsOnMethods = "editConstant")
     public void deleteConstants() {
         driver.get(String.format("https://%s.eteam.work", app_name));
 
         goToConstantsList();
-        commandInCMD(driver, "delete constant \"Company Name\"");
-        commandInCMD(driver, "delete constant \"Company Email\"");
+        commandInCMD("delete constant \"Company Name\"");
+        commandInCMD("delete constant \"Company Email\"");
 
         WebElement constant_table = getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated
                 (By.xpath("//div[contains(@class,'card-body')]")));

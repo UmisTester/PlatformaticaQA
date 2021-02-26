@@ -13,13 +13,13 @@ import runner.BaseTest;
 import runner.type.Run;
 import runner.type.RunType;
 import test.data.AppConstant;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
 
 @Run(run = RunType.Multiple)
 public class EntityBoardTest extends BaseTest {
@@ -37,6 +37,7 @@ public class EntityBoardTest extends BaseTest {
     private String dateForValidation;
     private String dateTimeForValidation;
     private String time;
+
     CalendarEntityPage calendar = new CalendarEntityPage(getDriver());
 
     @Test
@@ -51,9 +52,9 @@ public class EntityBoardTest extends BaseTest {
 
         time = new BoardEditPage(getDriver()).getCreatedTime()[1];
 
-        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(),  calendar.getCurrentYear(), '/');
-        dateTimeForValidation= String.format("%1s %2s", dateForValidation, time);
-        List<String> expectedValues = Arrays.asList(PENDING, TEXT, NUMBER, DECIMAL, dateForValidation, dateTimeForValidation,"",  APP_USER);
+        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(), calendar.getCurrentYear(), '/');
+        dateTimeForValidation = String.format("%1s %2s", dateForValidation, time);
+        List<String> expectedValues = Arrays.asList(PENDING, TEXT, NUMBER, DECIMAL, dateForValidation, dateTimeForValidation, "", APP_USER);
 
         Assert.assertEquals(boardListPage.getRowCount(), 1);
         Assert.assertEquals(boardListPage.getRow(0), expectedValues);
@@ -65,8 +66,8 @@ public class EntityBoardTest extends BaseTest {
         BoardPageEntityBase boardPage = new MainPage(getDriver())
                 .clickMenuBoard();
 
-        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(),  calendar.getCurrentYear(), '/');
-        dateTimeForValidation= String.format("%1s %2s", dateForValidation, time);
+        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(), calendar.getCurrentYear(), '/');
+        dateTimeForValidation = String.format("%1s %2s", dateForValidation, time);
 
         Assert.assertEquals(boardPage.getPendingItemsCount(), 1);
         Assert.assertEquals(boardPage.getPendingText(), String.format("%s %s %s %s %5$s %6$s apptester1@tester.com", PENDING, TEXT, NUMBER, DECIMAL, dateForValidation, dateTimeForValidation));
@@ -80,8 +81,8 @@ public class EntityBoardTest extends BaseTest {
                 .moveFromPedingToOntrack()
                 .clickListButton();
 
-        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(),  calendar.getCurrentYear(), '/');
-        dateTimeForValidation= String.format("%1s %2s", dateForValidation, time);
+        dateForValidation = String.format("%1$s%4$s%2$s%4$s%3$s", calendar.getRandomDay(), calendar.getCurrentMonth(), calendar.getCurrentYear(), '/');
+        dateTimeForValidation = String.format("%1s %2s", dateForValidation, time);
         List<String> expectedValues = Arrays.asList(ON_TRACK, TEXT, NUMBER, DECIMAL, dateForValidation, dateTimeForValidation, "", APP_USER);
 
         Assert.assertEquals(boardListPage.getRowCount(), 1);
@@ -216,15 +217,24 @@ public class EntityBoardTest extends BaseTest {
         Assert.assertEquals(boardPage.getPendingItemsCount(), 0);
     }
 
-   /* @Test (dependsOnMethods = {"inputValidationTest"})
-    public void searchRecord() {
+    @Test(dependsOnMethods = {"cancelInputTest"})
+    public void searchRecordByString() {
 
-        WebDriver driver = getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        BoardListPage boardListPage = new MainPage(getDriver())
+                .clickMenuBoard()
+                .clickNewFolder()
+                .fillform(PENDING, TEXT, NUMBER, DECIMAL, APP_USER)
+                .clickSaveButton()
+                .clickNewFolder()
+                .fillform(DONE, TEXT_EDIT, NUMBER_EDIT, DECIMAL_EDIT, APP_USER)
+                .clickSaveButton()
+                .clickListButton();
 
-        WebElement board = driver.findElement(By.xpath("//p[contains(text(),'Board')]"));
-        ProjectUtils.click(driver, board);
+        List<String> expectedValues = boardListPage.getRow(1);
 
-    }*/
+        boardListPage.fillSearchBox(expectedValues.get(0)).waitRowCountToBe(1);
+
+        Assert.assertEquals(boardListPage.getRow(0), expectedValues);
+        Assert.assertEquals(boardListPage.getPaginationInfo(), "Showing 1 to 1 of 1 rows");
+    }
 }
-
