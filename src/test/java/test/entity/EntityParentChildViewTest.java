@@ -22,6 +22,7 @@ public class EntityParentChildViewTest extends BaseTest {
     private static final String DECIMAL = "100.12";
     private static final String DATE = "02/03/2021";
     private static final String DATETIME = "02/03/2021 21:15:00";
+    private static final String USER = "user132@tester.com";
 
     @Test
     public void createParentTest() {
@@ -34,31 +35,31 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewParent = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewParent.click();
 
-        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
-        inputString.sendKeys(STRING);
+        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
+        InputString.sendKeys(STRING);
 
-        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        inputText.sendKeys(TEXT);
+        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        InputText.sendKeys(TEXT);
 
-        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        inputInt.sendKeys(INT);
+        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        InputInt.sendKeys(INT);
 
-        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        inputDecimal.sendKeys(DECIMAL);
+        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        InputDecimal.sendKeys(DECIMAL);
 
-        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        inputDate.sendKeys(DATE);
+        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        InputDate.sendKeys(DATE);
 
-        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        inputDateTime.sendKeys(DATETIME);
+        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        InputDateTime.sendKeys(DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
-        Dropdown.selectByVisibleText("user132@tester.com");
+        Dropdown.selectByVisibleText(USER);
 
         WebElement saveButton = driver.findElement(By.xpath("//button[@id='pa-entity-form-save-btn']"));
         saveButton.click();
 
-        List<WebElement> parentRecord = driver.findElements(By.xpath("//tbody/tr[1]"));
+        List<WebElement> parentRecord = driver.findElements(By.xpath("//tbody/tr"));
         Assert.assertEquals(parentRecord.size(), 1);
     }
 
@@ -76,38 +77,38 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewChild = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewChild.click();
 
-        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
-        inputString.sendKeys(STRING);
+        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
+        InputString.sendKeys(STRING);
 
-        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        inputText.sendKeys(TEXT);
+        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        InputText.sendKeys(TEXT);
 
-        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        inputInt.sendKeys(INT);
+        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        InputInt.sendKeys(INT);
 
-        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        inputDecimal.sendKeys(DECIMAL);
+        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        InputDecimal.sendKeys(DECIMAL);
 
-        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        ProjectUtils.fill(getWebDriverWait(),inputDate, DATE);
+        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        ProjectUtils.fill(getWebDriverWait(),InputDate, DATE);
 
-        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        ProjectUtils.fill(getWebDriverWait(),inputDateTime, DATETIME);
+        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        ProjectUtils.fill(getWebDriverWait(),InputDateTime, DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
-        Dropdown.selectByVisibleText("user132@tester.com");
+        Dropdown.selectByVisibleText(USER);
 
         WebElement saveButton = driver.findElement(By.xpath("//button[@id='pa-entity-form-save-btn']"));
         saveButton.click();
 
-        List<WebElement> childRecord = driver.findElements(By.xpath("//tbody/tr[1]"));
+        List<WebElement> childRecord = driver.findElements(By.xpath("//tbody/tr"));
         Assert.assertEquals(childRecord.size(), 1);
 
         List<String> childRecordList = driver.findElement(By.xpath("//tbody/tr[1]"))
                 .findElements(By.tagName("td"))
                 .stream().map(WebElement::getText)
                 .collect(Collectors.toList()).subList(1,9);
-        Assert.assertEquals(childRecordList, Arrays.asList(STRING,TEXT,INT,DECIMAL,DATE,DATETIME,"","user132@tester.com"));
+        Assert.assertEquals(childRecordList, Arrays.asList(STRING,TEXT,INT,DECIMAL,DATE,DATETIME,"",USER));
     }
 
     @Test(dependsOnMethods = "createChild1Test")
@@ -124,26 +125,26 @@ public class EntityParentChildViewTest extends BaseTest {
         WebElement createNewChild = driver.findElement(By.xpath("//i[contains(text(),'create_new_folder')]"));
         createNewChild.click();
 
-        WebElement inputString = driver.findElement(By.xpath("//input[@id='string']"));
-        inputString.sendKeys(STRING);
+        WebElement InputString = driver.findElement(By.xpath("//input[@id='string']"));
+        InputString.sendKeys(STRING);
 
-        WebElement inputText = driver.findElement(By.xpath("//textarea[@id='text']"));
-        inputText.sendKeys(TEXT);
+        WebElement InputText = driver.findElement(By.xpath("//textarea[@id='text']"));
+        InputText.sendKeys(TEXT);
 
-        WebElement inputInt = driver.findElement(By.xpath("//input[@id='int']"));
-        inputInt.sendKeys(INT);
+        WebElement InputInt = driver.findElement(By.xpath("//input[@id='int']"));
+        InputInt.sendKeys(INT);
 
-        WebElement inputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
-        inputDecimal.sendKeys(DECIMAL);
+        WebElement InputDecimal = driver.findElement(By.xpath("//input[@id='decimal']"));
+        InputDecimal.sendKeys(DECIMAL);
 
-        WebElement inputDate = driver.findElement(By.xpath("//input[@id='date']"));
-        ProjectUtils.fill(getWebDriverWait(),inputDate, DATE);
+        WebElement InputDate = driver.findElement(By.xpath("//input[@id='date']"));
+        ProjectUtils.fill(getWebDriverWait(),InputDate, DATE);
 
-        WebElement inputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
-        ProjectUtils.fill(getWebDriverWait(),inputDateTime, DATETIME);
+        WebElement InputDateTime = driver.findElement(By.xpath("//input[@id='datetime']"));
+        ProjectUtils.fill(getWebDriverWait(),InputDateTime, DATETIME);
 
         Select Dropdown = new Select(driver.findElement(By.xpath("//select[@name='entity_form_data[user]']")));
-        Dropdown.selectByVisibleText("user132@tester.com");
+        Dropdown.selectByVisibleText(USER);
 
         WebElement saveButton = driver.findElement(By.xpath("//button[@id='pa-entity-form-save-btn']"));
         saveButton.click();
@@ -155,7 +156,7 @@ public class EntityParentChildViewTest extends BaseTest {
                 .findElements(By.tagName("td"))
                 .stream().map(WebElement::getText)
                 .collect(Collectors.toList()).subList(1,9);
-        Assert.assertEquals(childRecordList, Arrays.asList(STRING,TEXT,INT,DECIMAL,DATE,DATETIME,"","user132@tester.com"));
+        Assert.assertEquals(childRecordList, Arrays.asList(STRING,TEXT,INT,DECIMAL,DATE,DATETIME,"",USER));
 
     }
 }
