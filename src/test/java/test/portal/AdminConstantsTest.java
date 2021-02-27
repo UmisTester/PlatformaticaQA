@@ -1,9 +1,12 @@
 package test.portal;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectUtils;
@@ -59,6 +62,7 @@ public class AdminConstantsTest extends BaseTest {
                 (By.xpath("//textarea[@id='pa-cli-cmd']"))));
     }
 
+    @Ignore
     @Test
     public void createApplicationTest() {
         driver = getDriver();

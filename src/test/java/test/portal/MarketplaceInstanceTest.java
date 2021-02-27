@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectUtils;
@@ -46,7 +47,7 @@ public class MarketplaceInstanceTest extends BaseTest {
 
     private String[] getInstanceValues() {
         String name = RandomStringUtils.randomAlphanumeric(6, 10).toLowerCase();
-        return new String[] {name, name, String.format("https://%s.eteam.work", name), "admin", "2", "1", PRIMARY_LANGUAGE};
+        return new String[]{name, name, String.format("https://%s.eteam.work", name), "admin", "2", "1", PRIMARY_LANGUAGE};
     }
 
     private String[] createInstance(WebDriver driver) {
@@ -99,10 +100,10 @@ public class MarketplaceInstanceTest extends BaseTest {
         return template_values;
     }
 
-    private void assertInstanceValues (String[] instance_values) {
+    private void assertInstanceValues(String[] instance_values) {
         if (instance_values != null) {
             List<WebElement> actual_instance_record = getDriver().findElements(By.xpath("//tbody/tr/td/a"));
-            for (int i = 0; i < instance_values.length; i++){
+            for (int i = 0; i < instance_values.length; i++) {
                 String actual_value = String.valueOf(actual_instance_record.get(i).getText());
                 Assert.assertEquals(actual_value, instance_values[i]);
             }
@@ -122,7 +123,8 @@ public class MarketplaceInstanceTest extends BaseTest {
         Assert.assertTrue(record_table.getText().isEmpty());
     }
 
-    @Test (dependsOnMethods = "instanceCancelTest")
+    @Ignore
+    @Test(dependsOnMethods = "instanceCancelTest")
     public void instanceDraftTest() {
         WebDriver driver = getDriver();
 
@@ -138,7 +140,7 @@ public class MarketplaceInstanceTest extends BaseTest {
         ProjectUtils.click(driver, driver.findElement(RESET));
     }
 
-    @Test (dependsOnMethods = "instanceDraftTest")
+    @Test(dependsOnMethods = "instanceDraftTest")
     public void instanceUniquenessTest() {
         WebDriver driver = getDriver();
 
@@ -155,7 +157,7 @@ public class MarketplaceInstanceTest extends BaseTest {
         ProjectUtils.click(driver, driver.findElement(RESET));
     }
 
-    @Test (dependsOnMethods = "instanceUniquenessTest")
+    @Test(dependsOnMethods = "instanceUniquenessTest")
     public void instancePasswordTest() {
         WebDriver driver = getDriver();
 
@@ -170,6 +172,7 @@ public class MarketplaceInstanceTest extends BaseTest {
         ProjectUtils.click(driver, driver.findElement(RESET));
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"instanceUniquenessTest", "instancePasswordTest"})
     public void instanceCreateTest() {
         WebDriver driver = getDriver();
@@ -179,11 +182,11 @@ public class MarketplaceInstanceTest extends BaseTest {
         Assert.assertEquals(driver.findElement(CONGRATS_TEXT).getText(), AppConstant.INSTANCE_CREATED_TEXT);
     }
 
-    @Test (dependsOnMethods = "instanceCreateTest")
+    @Test(dependsOnMethods = "instanceCreateTest")
     public void instanceViewTest() {
         WebDriver driver = getDriver();
 
-        actionsClick(driver,"view");
+        actionsClick(driver, "view");
         List<WebElement> instance_elements = driver.findElements
                 (By.xpath("//div[contains(@class,'card-body')]//span"));
         for (int i = 0; i < 4; i++) {
@@ -191,7 +194,7 @@ public class MarketplaceInstanceTest extends BaseTest {
         }
     }
 
-    @Test (dependsOnMethods = "instanceViewTest")
+    @Test(dependsOnMethods = "instanceViewTest")
     public void instanceTemplateCancelTest() {
         WebDriver driver = getDriver();
 
@@ -201,49 +204,49 @@ public class MarketplaceInstanceTest extends BaseTest {
         Assert.assertTrue(record_table.getText().isEmpty());
     }
 
-    @Test (dependsOnMethods = "instanceTemplateCancelTest")
+    @Test(dependsOnMethods = "instanceTemplateCancelTest")
     public void instanceTemplateDraftTest() {
         WebDriver driver = getDriver();
 
-        actionsClick(driver,"Save as template");
+        actionsClick(driver, "Save as template");
         assertInstanceValues(createTemplate(driver, "draft"));
         Assert.assertEquals(driver.findElement(By.xpath("//tr/td/i")).getAttribute("class"), AppConstant.DRAFT_ICON_CLASS);
-        actionsClick(driver,"delete");
+        actionsClick(driver, "delete");
         WebElement record_table = getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(TABLE));
         Assert.assertTrue(record_table.getText().isEmpty());
     }
 
-    @Test (dependsOnMethods = "instanceTemplateDraftTest")
+    @Test(dependsOnMethods = "instanceTemplateDraftTest")
     public void instanceTemplateSaveTest() {
         WebDriver driver = getDriver();
 
-        actionsClick(driver,"Save as template");
+        actionsClick(driver, "Save as template");
         assertInstanceValues(createTemplate(driver, "save"));
         Assert.assertEquals(driver.findElement(By.xpath("//tr/td/i")).getAttribute("class"), AppConstant.RECORD_ICON_CLASS);
-        actionsClick(driver,"delete");
+        actionsClick(driver, "delete");
         WebElement record_table = getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(TABLE));
         Assert.assertTrue(record_table.getText().isEmpty());
     }
 
-    @Test (dependsOnMethods = "instanceTemplateSaveTest")
+    @Test(dependsOnMethods = "instanceTemplateSaveTest")
     public void instanceDeleteTest() {
         WebDriver driver = getDriver();
 
-        actionsClick(driver,"delete");
+        actionsClick(driver, "delete");
         WebElement record_table = getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(TABLE));
         Assert.assertTrue(record_table.getText().isEmpty());
     }
 
-    @Test (dependsOnMethods = "instanceDeleteTest")
+    @Test(dependsOnMethods = "instanceDeleteTest")
     public void ascOrder() {
         InstancePage instancePage = new InstancePage(getDriver())
-                        .clickNewFolder()
-                        .fillOutInstanceForm("bbbb", "bbbb", PRIMARY_LANGUAGE)
-                        .clickSaveButton()
-                        .clickNewFolder()
-                        .fillOutInstanceForm("aaaa", "aaaa", PRIMARY_LANGUAGE)
-                        .clickSaveButton()
-                        .clickColumnHeader("Name");
+                .clickNewFolder()
+                .fillOutInstanceForm("bbbb", "bbbb", PRIMARY_LANGUAGE)
+                .clickSaveButton()
+                .clickNewFolder()
+                .fillOutInstanceForm("aaaa", "aaaa", PRIMARY_LANGUAGE)
+                .clickSaveButton()
+                .clickColumnHeader("Name");
 
         Assert.assertEquals(instancePage.getNames(), ascNames);
     }
