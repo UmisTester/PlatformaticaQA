@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectUtils;
 
-@Ignore
 public class EntityImportEditTest extends BaseTest {
 
     private static final String STRING = "String new Added";
@@ -154,7 +153,7 @@ public class EntityImportEditTest extends BaseTest {
 
         userCreate(driver);
 
-        Assert.assertEquals(driver.findElement(By.xpath("//div[contains(text(),'" + STRING + "')]")).getText(), STRING);
+        Assert.assertEquals(driver.findElement(By.xpath("//a[contains(text(),'" + STRING + "')]")).getText(), STRING);
 
         ProjectUtils.click(driver, driver.findElement(By.xpath("//i[normalize-space()='menu']")));
 
@@ -164,7 +163,7 @@ public class EntityImportEditTest extends BaseTest {
 
         userEdit(driver);
 
-        Assert.assertEquals(driver.findElement(By.xpath("//div[contains(text() , '" + STRING_EDIT + "')]"))
+        Assert.assertEquals(driver.findElement(By.xpath("//a[contains(text() , '" + STRING_EDIT + "')]"))
                 .getText(), STRING_EDIT);
 
         userDelete(driver);
