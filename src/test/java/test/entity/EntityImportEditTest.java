@@ -165,7 +165,6 @@ public class EntityImportEditTest extends BaseTest {
 
         Assert.assertEquals(driver.findElement(By.xpath("//a[contains(text() , '" + STRING_EDIT + "')]"))
                 .getText(), STRING_EDIT);
-
         userDelete(driver);
     }
 
